@@ -1,0 +1,13 @@
+spring:
+  server:
+    port: 8081
+  datasource:
+    url: jdbc:postgresql://localhost:5433/order-db
+    username: postgres
+    password: postgres
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect

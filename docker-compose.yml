@@ -1,0 +1,31 @@
+version: '3.8'
+services:
+  app:
+    image: order-service
+    build:
+      context: .
+    container_name: order-service
+    depends_on:
+      - db
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://odb:5433/order-db
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=postgres
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+    ports:
+      - '8081:8081'
+  db:
+    image: postgres:14.1-alpine
+    restart: always
+    container_name: odb
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=order-db
+    ports:
+      - '5433:5433'
+    volumes:
+      - db:/var/lib/postgresql/data
+volumes:
+  db:
+    driver: local
